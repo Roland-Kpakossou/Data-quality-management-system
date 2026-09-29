@@ -1,0 +1,15 @@
+# Base PostgreSQL pour tester le projet (mot de passe de démo, seulement en local)
+services:
+  db:
+    image: postgres:16
+    container_name: dq-postgres
+    environment:
+      POSTGRES_DB: gestion_qualite
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./sql/02_donnees_exemple.sql:/docker-entrypoint-initdb.d/02_donnees_exemple.sql:ro
+      - ./sql/03_controles_qualite.sql:/docker-entrypoint-initdb.d/03_controles_qualite.sql:ro

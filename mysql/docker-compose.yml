@@ -1,0 +1,14 @@
+# Base MySQL pour tester le projet (mot de passe de démo, seulement en local)
+services:
+  db:
+    image: mysql:8.4
+    container_name: dq-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: demo
+    ports:
+      - "3306:3306"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci
+    volumes:
+      - ./sql/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./sql/02_donnees_exemple.sql:/docker-entrypoint-initdb.d/02_donnees_exemple.sql:ro
+      - ./sql/03_controles_qualite.sql:/docker-entrypoint-initdb.d/03_controles_qualite.sql:ro
